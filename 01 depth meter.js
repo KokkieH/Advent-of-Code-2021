@@ -1,3 +1,8 @@
+/** Advent of Code 2021
+ * Challenge Day 1: Sonar Sweep
+ * https://adventofcode.com/2021/day/1 
+ * */
+
 var input = `100
 125
 124
@@ -2004,7 +2009,9 @@ var input = `100
 const lbreak = /\s/;
 var data = input.split(lbreak).map(Number);
 
-// iterate through array, and increas a counter each time the next number in the array is higher than the one preceding it
+/** Part 1 */
+
+// iterate through array, and increment a counter each time the next number in the array is higher than the one preceding it
 var counter = 0;
 for (var i=0; i<data.length; i++) {
     if (data[i] < data[i+1]) {
@@ -2013,3 +2020,20 @@ for (var i=0; i<data.length; i++) {
 }
 
 console.log(counter);
+
+/** Part 2 */
+
+var sum_counter = 0;
+var oldsum;
+// iterate through array, adding the next to numbers in the array to the current one, then compare it's total to the previous set and increment counter if the new total is higher than the previous one
+for (var j=0; j<data.length; j++) {
+    if (j+2 <= data.length) {
+        var newsum = data[j] + data[j+1] + data[j+2];
+        if (oldsum < newsum) {
+            sum_counter++;
+        }
+        oldsum = newsum;
+    }
+}
+
+console.log(sum_counter);
