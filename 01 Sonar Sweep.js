@@ -2005,7 +2005,7 @@ var input = `100
 10044
 `;
 
-// convert input into an array or numbers
+// convert input into an array of numbers
 const lbreak = /\s/;
 var data = input.split(lbreak).map(Number);
 
