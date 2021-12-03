@@ -3,7 +3,7 @@
  * https://adventofcode.com/2021/day/1 
  * */
 
-var input = `100
+const input = `100
 125
 124
 127
@@ -2006,15 +2006,14 @@ var input = `100
 `;
 
 // convert input into an array of numbers
-const lbreak = /\s/;
-var data = input.split(lbreak).map(Number);
+var depth = input.split(/\n/).map(Number);
 
 /** Part 1 */
 
 // iterate through array, and increment a counter each time the next number in the array is higher than the one preceding it
 var counter = 0;
-for (var i=0; i<data.length; i++) {
-    if (data[i] < data[i+1]) {
+for (var i=0; i<depth.length; i++) {
+    if (depth[i] < depth[i+1]) {
         counter++;
     }
 }
@@ -2025,10 +2024,10 @@ console.log(counter);
 
 var sum_counter = 0;
 var oldsum;
-// iterate through array, adding the next to numbers in the array to the current one, then compare it's total to the previous set and increment counter if the new total is higher than the previous one
-for (var j=0; j<data.length; j++) {
-    if (j+2 <= data.length) {
-        var newsum = data[j] + data[j+1] + data[j+2];
+// iterate through array, adding the next two numbers in the array to the current one, then compare it's total to the previous set and increment counter if the new total is higher than the previous one
+for (var j=0; j<depth.length; j++) {
+    if (j+2 <= depth.length) {
+        var newsum = depth[j] + depth[j+1] + depth[j+2];
         if (oldsum < newsum) {
             sum_counter++;
         }

@@ -1007,9 +1007,7 @@ forward 7
 
 // convert input into a nested array containing instructions and numbers
 // got help from https://stackoverflow.com/a/34971243/5227705
-const lbreak = /\s/g;
-var data = '[[' + input.replace(/([a-zA-Z]+)/g, '"$1"').replace(/ /g, ',').replaceAll(lbreak, '],[') + `]]`;
-data = JSON.parse(data);
+var course = JSON.parse('[[' + input.replace(/([a-zA-Z]+)/g, '"$1"').replace(/ /g, ',').replaceAll(/\n/g, '],[') + `]]`);
 
 /** Part 1 */
 
