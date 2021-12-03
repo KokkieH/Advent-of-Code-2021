@@ -1006,7 +1006,7 @@ forward 7
 `;
 
 // convert input into a nested array containing instructions and numbers
-// got help from https://stackoverflow.com/a/34971243/5227705
+// with help from https://stackoverflow.com/a/34971243/5227705
 var course = JSON.parse('[[' + input.replace(/([a-zA-Z]+)/g, '"$1"').replace(/ /g, ',').replaceAll(/\n/g, '],[') + `]]`);
 
 /** Part 1 */
@@ -1033,3 +1033,26 @@ var final_pos = hor_pos * depth;
 console.log(final_pos);
 
 /** Part 2 */
+
+hor_pos = 0;
+depth = 0;
+var aim = 0;
+
+// iterate through nested array and adjust values based on each step
+for (var i=0; i<course.length; i++) {
+    switch (course[i][0]) {
+        case "forward":
+            hor_pos = hor_pos + course[i][1];
+            depth = depth + (aim * course[i][1]);
+            break;
+        case "down":
+            aim = aim + course[i][1];
+            break;
+        case "up":
+            aim = aim - course[i][1];
+            break;
+    }
+}
+
+var final_pos2 = hor_pos * depth;
+console.log(final_pos2);
