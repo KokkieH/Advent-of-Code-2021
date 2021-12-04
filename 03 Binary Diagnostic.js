@@ -12,7 +12,7 @@ const input = `110001010111
 011100000101
 011110110011
 001001111111
-111000010000`;/*
+111000010000
 001000101100
 011100111010
 011100111000
@@ -1003,27 +1003,56 @@ const input = `110001010111
 101101000100
 001110001101
 111001101111
-`;*/
+`;
 
 // convert input into an array
 var diagnostic_report = input.split(/\n/);
 
 /** Part 1 */
 
+var gamma_rate = '';
+var epsilon_rate = '';
+
+// iterate through each bit in the binary numbers in turn
 for (var i=0; i<12; i++) {
     var count_1 = 0;
     var count_0 = 0;
+    var gamma_bit;
+    var epsilon_bit;
+
+    // iterate through the array, incrementing a counter depending on the current bit's value
+    // to determine which value is more prevalent
     for (var j=0; j<diagnostic_report.length; j++) {
-        //console.log(diagnostic_report[j][i]);
-        if (diagnostic_report[j][i] = "1") {
+        if (diagnostic_report[j][i] == '1') {
             count_1++;
         }
-        else {
+        else if (diagnostic_report[j][i] == '0') {
             count_0++;
         }
     }
+
+    // assign a bit value to the Gamma and Epsilon rates, depending on which value
+    // is more prevalent in the array for the current bit being evaluated,
+    // and append it to the string
+    if (count_1 > count_0) {
+        gamma_bit = '1';
+        epsilon_bit = '0';
+    }
+    else if (count_1 < count_0) {
+        gamma_bit = '0';
+        epsilon_bit = '1';
+    }
+
+    gamma_rate = gamma_rate + gamma_bit;
+    epsilon_rate = epsilon_rate + epsilon_bit
 }
 
+// convert binary numbers into integers, and multiple to get power consumption
+gamma_rate = parseInt(gamma_rate, 2);
+epsilon_rate = parseInt(epsilon_rate, 2);
 
+var power_consumption = gamma_rate * epsilon_rate;
+
+console.log("Power Consumption = " + power_consumption);
 
 /** Part 2 */
