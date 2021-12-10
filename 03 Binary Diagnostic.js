@@ -1008,28 +1008,31 @@ const input = `110001010111
 // convert input into an array
 var diagnostic_report = input.split(/\n/);
 
+// function to count number of times a particular value occurs for a particular bit for each binary number in array
+function countBits(array, i) {
+    for (var j = 0; j < array.length; j++) {
+        if (array[j][i] == '1') {
+            count_1++;
+        }
+        else if (array[j][i] == '0') {
+            count_0++;
+        }
+    }
+}
+
 /** Part 1 */
 
 var gamma_rate = '';
 var epsilon_rate = '';
 
 // iterate through each bit in the binary numbers in turn
-for (var i=0; i<12; i++) {
+for (var i = 0; i < 12; i++) {
     var count_1 = 0;
     var count_0 = 0;
     var gamma_bit;
     var epsilon_bit;
 
-    // iterate through the array, incrementing a counter depending on the current bit's value
-    // to determine which value is more prevalent
-    for (var j=0; j<diagnostic_report.length; j++) {
-        if (diagnostic_report[j][i] == '1') {
-            count_1++;
-        }
-        else if (diagnostic_report[j][i] == '0') {
-            count_0++;
-        }
-    }
+    countBits(diagnostic_report, i);
 
     // assign a bit value to the Gamma and Epsilon rates, depending on which value
     // is more prevalent in the array for the current bit being evaluated,
@@ -1047,7 +1050,7 @@ for (var i=0; i<12; i++) {
     epsilon_rate = epsilon_rate + epsilon_bit
 }
 
-// convert binary numbers into integers, and multiple to get power consumption
+// convert binary numbers into integers, and multiply to get power consumption
 gamma_rate = parseInt(gamma_rate, 2);
 epsilon_rate = parseInt(epsilon_rate, 2);
 
@@ -1056,3 +1059,47 @@ var power_consumption = gamma_rate * epsilon_rate;
 console.log("Power Consumption = " + power_consumption);
 
 /** Part 2 */
+
+// create copies of the array containing the data
+var o2_generator = Array.from(diagnostic_report);
+var co2_scrubber = Array.from(diagnostic_report);
+
+// iterate through each bit in the binary numbers in turn
+for (var i = 0; i < 12; i++) {
+    var count_1 = 0;
+    var count_0 = 0;
+
+    // for each array, filter out the values to keep, based on most prevalent value for each bit
+    
+    countBits(o2_generator, i);
+
+    o2_check: if (o2_generator.length == 1) {
+        break o2_check;
+    }
+    else if (count_1 >= count_0) {
+        o2_generator = o2_generator.filter(item => item[i] == '1');
+    }
+    else if (count_1 < count_0) {
+        o2_generator = o2_generator.filter(item => item[i] == '0');
+    }
+
+    countBits(co2_scrubber, i);
+
+    co2_check: if (co2_scrubber.length == 1) {
+        break co2_check;
+    }
+    else if (count_1 >= count_0) {
+        co2_scrubber = co2_scrubber.filter(item => item[i] == '0');
+    }
+    else if (count_1 < count_0) {
+        co2_scrubber = co2_scrubber.filter(item => item[i] == '1');
+    }
+}
+
+// convert binary numbers into integers, and multiply to get power consumption
+o2_generator = parseInt(o2_generator, 2);
+co2_scrubber = parseInt(co2_scrubber, 2);
+
+var life_support = o2_generator * co2_scrubber;
+
+console.log("Life Support = " + life_support);
