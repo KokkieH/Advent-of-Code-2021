@@ -3,7 +3,7 @@
  * https://adventofcode.com/2021/day/2
  * */
 
-const input = `forward 6
+const INPUT = `forward 6
 down 3
 forward 8
 down 5
@@ -1007,7 +1007,7 @@ forward 7
 
 // convert input into a nested array containing instructions and numbers
 // with help from https://stackoverflow.com/a/34971243/5227705
-var course = JSON.parse('[[' + input.replace(/([a-zA-Z]+)/g, '"$1"').replace(/ /g, ',').replaceAll(/\n/g, '],[') + `]]`);
+var course = JSON.parse('[[' + INPUT.replace(/([a-zA-Z]+)/g, '"$1"').replace(/ /g, ',').replaceAll(/\n/g, '],[') + `]]`);
 
 /** Part 1 */
 

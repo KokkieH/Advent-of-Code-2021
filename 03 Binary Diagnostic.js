@@ -3,7 +3,7 @@
  * https://adventofcode.com/2021/day/3
  * */
 
-const input = `110001010111
+const INPUT = `110001010111
 011011110010
 110011110011
 101000010111
@@ -1005,9 +1005,6 @@ const input = `110001010111
 111001101111
 `;
 
-// convert input into an array
-var diagnostic_report = input.split(/\n/);
-
 // function to count number of times a particular value occurs for a particular bit for each binary number in array
 function countBits(array, i) {
     for (var j = 0; j < array.length; j++) {
@@ -1021,6 +1018,9 @@ function countBits(array, i) {
 }
 
 /** Part 1 */
+
+// convert input into an array
+var diagnostic_report = INPUT.split(/\n/);
 
 var gamma_rate = '';
 var epsilon_rate = '';

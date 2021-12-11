@@ -3,7 +3,7 @@
  * https://adventofcode.com/2021/day/1 
  * */
 
-const input = `100
+const INPUT = `100
 125
 124
 127
@@ -2006,7 +2006,7 @@ const input = `100
 `;
 
 // convert input into an array of numbers
-var depth = input.split(/\n/).map(Number);
+var depth = INPUT.split(/\n/).map(Number);
 
 /** Part 1 */
 
